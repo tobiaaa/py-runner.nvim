@@ -1,11 +1,18 @@
+local M = {}
+
+function M.setup()
+
+end
+
 local run_config = function()
     print("Running config...")
 end
 
 local save_config = function(file, config)
-    print(file)
+    local json = vim.json.encode({ file = config })
+    print(json)
 end
-bc
+
 local run_last = function()
     print("Running Last")
 end
@@ -17,6 +24,8 @@ local ask_new_config = function()
             save_config(filename, input)
         end)
 end
+
+return M
 
 -- Create User commands
 vim.api.nvim_create_user_command('RunLast', run_last, {})

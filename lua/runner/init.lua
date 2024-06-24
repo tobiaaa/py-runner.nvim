@@ -2,8 +2,7 @@ local M = {}
 
 function M.setup()
     -- Create Data dir
-    local path = require("plenary.path")
-    path:new('../data'):mkdir()
+    vim.fn.mkdir('../../data')
 end
 
 local run_config = function()

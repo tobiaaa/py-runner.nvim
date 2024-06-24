@@ -2,7 +2,9 @@ local M = {}
 
 function M.setup()
     -- Create Data dir
-    vim.fn.mkdir('../../data')
+    if not vim.fn.isdirectory('../../data') then
+        vim.fn.mkdir('../../data')
+    end
 end
 
 local run_config = function()

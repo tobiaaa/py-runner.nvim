@@ -25,7 +25,6 @@ local ask_new_config = function()
         end)
 end
 
-return M
 
 -- Create User commands
 vim.api.nvim_create_user_command('RunLast', run_last, {})
@@ -35,3 +34,5 @@ vim.api.nvim_create_user_command('AskConfig', ask_new_config, {})
 local map = vim.keymap.set
 
 map('n', '<leader>r', '<cmd>RunLast<CR>', { desc = "Run last configuration" })
+
+return M

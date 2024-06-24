@@ -2,8 +2,8 @@ local M = {}
 
 function M.setup()
     -- Create Data dir
-    local plenary = require("plenary")
-    plenary.path.mkdir('../data')
+    local path = require("plenary.path")
+    path:mkdir('../data')
 end
 
 local run_config = function()

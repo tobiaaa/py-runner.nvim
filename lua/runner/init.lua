@@ -4,7 +4,6 @@ local save_path = vim.fn.stdpath('data') .. '/runner'
 
 function M.setup()
     -- Create Data dir
-    print(save_path)
     if not vim.fn.isdirectory(save_path) then
         local success = vim.fn.mkdir(save_path)
         if success then
@@ -12,6 +11,8 @@ function M.setup()
         else
             print("Could not create directory")
         end
+    else
+        print("Directory already exists")
     end
 end
 

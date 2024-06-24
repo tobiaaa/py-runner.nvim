@@ -1,7 +1,9 @@
 local M = {}
 
 function M.setup()
-
+    -- Create Data dir
+    local lfs = require("lfs")
+    lfs.mkdir('../data')
 end
 
 local run_config = function()

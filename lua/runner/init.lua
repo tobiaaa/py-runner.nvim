@@ -48,7 +48,6 @@ local get_config = function(file)
 end
 
 
-
 local get_last = function()
     local save_file = io.open(save_path .. "/last.json", "r")
     if not save_file then
@@ -84,6 +83,11 @@ local save_last = function(config)
 end
 
 local run_config = function(config)
+    save_last(config)
+
+    -- Send to terminal
+    local term = require("toggleterm")
+    term.exec(config)
     print("Running config...")
 end
 

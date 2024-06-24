@@ -23,8 +23,8 @@ local save_config = function(file, config)
     end
     save_table[file] = config
 
+    save_file = io.open(save_path .. 'configs.json', "w+")
     local json = vim.json.encode(save_table)
-    vim.fn.writefile(save_table, save_path .. "configs.json")
     if not save_file then
         print("Could not save config")
     else

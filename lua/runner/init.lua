@@ -6,7 +6,12 @@ function M.setup()
     -- Create Data dir
     print(save_path)
     if not vim.fn.isdirectory(save_path) then
-        vim.fn.mkdir(save_path)
+        local success = vim.fn.mkdir(save_path)
+        if success then
+            print("Created directory")
+        else
+            print("Could not create directory")
+        end
     end
 end
 

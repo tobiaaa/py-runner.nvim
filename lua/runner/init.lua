@@ -11,9 +11,8 @@ function M.setup()
         else
             print("Could not create directory")
         end
-    else
-        print("Directory already exists")
     end
+    print(save_path)
 end
 
 local run_config = function()

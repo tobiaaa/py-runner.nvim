@@ -2,8 +2,8 @@ local M = {}
 
 function M.setup()
     -- Create Data dir
-    local lfs = require("lfs")
-    lfs.mkdir('../data')
+    local plenary = require("plenary")
+    plenary.path.mkdir('../data')
 end
 
 local run_config = function()

@@ -1,6 +1,6 @@
 local M = {}
 
-local save_path = vim.fn.stdpath('data') .. '/runner/'
+local save_path = vim.fn.stdpath('data') .. '/runner'
 
 function M.setup()
     -- Create Data dir
@@ -15,7 +15,7 @@ local run_config = function()
 end
 
 local save_config = function(file, config)
-    local save_file = io.open(save_path .. "configs.json", "r")
+    local save_file = io.open(save_path .. "/configs.json", "r")
     local save_table = {}
     if save_file then
         save_table = vim.json.decode(save_file:read("*a"))
@@ -23,7 +23,7 @@ local save_config = function(file, config)
     end
     save_table[file] = config
 
-    save_file = io.open(save_path .. 'configs.json', "w+")
+    save_file = io.open(save_path .. '/configs.json', "w+")
     local json = vim.json.encode(save_table)
     if not save_file then
         print("Could not save config")

@@ -33,6 +33,8 @@ local ask_new_config = function()
             save_config(filename, input)
         end)
 end
+
+
 local get_config = function(file)
     local save_file = io.open(save_path .. "/configs.json", "r")
     local save_table = {}
@@ -44,9 +46,8 @@ local get_config = function(file)
     if config ~= nil then
         return config
     end
-    ask_new_config()
+    print("No config found")
 end
-
 
 local get_last = function()
     local save_file = io.open(save_path .. "/last.json", "r")
@@ -98,15 +99,21 @@ local run_last = function()
     run_config(last_conf)
 end
 
+local run_current = function()
+    local conf = get_config(vim.fn.expand("%:p"))
 
+    run_config(conf)
+end
 
 -- Create User commands
 vim.api.nvim_create_user_command('RunLast', run_last, {})
 vim.api.nvim_create_user_command('AskConfig', ask_new_config, {})
+vim.api.nvim_create_user_command('RunCurrent', run_current, {})
 
 -- Create Keybindings
 local map = vim.keymap.set
 
 map('n', '<leader>r', '<cmd>RunLast<CR>', { desc = "Run last configuration" })
+map('n', '<leader>R', '<cmd>RunCurrent<CR>', { desc = "Run current buffer" })
 
 return M

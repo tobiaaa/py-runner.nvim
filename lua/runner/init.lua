@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     -- Create Data dir
     local path = require("plenary.path")
-    path:mkdir('../data', {})
+    path:new('../data'):mkdir()
 end
 
 local run_config = function()

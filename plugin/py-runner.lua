@@ -9,9 +9,7 @@ local run_config = function()
 end
 
 local save_config = function(file, config)
-    local t = {}
-    t[file] = config
-    local json = vim.json.encode({t})
+    local json = vim.json.encode({ file = config })
     print(json)
 end
 

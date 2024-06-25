@@ -104,10 +104,16 @@ local run_current = function()
     run_config(conf)
 end
 
+local kill = function ()
+    local term = require("toggleterm")
+    term.exec("<C-c>")
+end
+
 -- Create User commands
 vim.api.nvim_create_user_command('RunLast', run_last, {})
 vim.api.nvim_create_user_command('AskConfig', ask_new_config, {})
 vim.api.nvim_create_user_command('RunCurrent', run_current, {})
+vim.api.nvim_create_user_command('KillCurrent', kill, {})
 
 -- Create Keybindings
 local map = vim.keymap.set

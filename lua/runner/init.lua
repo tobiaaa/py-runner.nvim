@@ -49,6 +49,7 @@ local get_config = function(file)
     error("No config found")
 end
 
+
 local get_last = function()
     local save_file = io.open(save_path .. "/last.json", "r")
     if not save_file then
@@ -92,15 +93,14 @@ local run_config = function(config)
 end
 
 local run_last = function()
-    local last_conf_key = get_last()
-    local last_conf = get_config(last_conf_key)
+    local last_conf= get_last()
 
     run_config(last_conf)
 end
 
 local run_current = function()
     local conf = get_config(vim.fn.expand("%:p"))
-
+    
     run_config(conf)
 end
 

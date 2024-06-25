@@ -70,8 +70,8 @@ local save_last = function(config)
         save_table = vim.json.decode(save_file:read("*a"))
         save_file:close()
     end
-    local project = vim.fn.getcwd
-    save_table[string(project)] = config
+    local project = vim.fn.getcwd()
+    save_table[project] = config
 
     save_file = io.open(save_path .. '/last.json', "w+")
     local json = vim.json.encode(save_table)

@@ -27,7 +27,7 @@ local save_config = function(file, config)
 end
 
 local ask_new_config = function()
-    vim.ui.input({ prompt = "Enter configuration" },
+    vim.ui.input({ prompt = "Enter configuration" , completion = "file"},
         function(input)
             local filename = vim.fn.expand('%:p')
             save_config(filename, input)
@@ -93,14 +93,14 @@ local run_config = function(config)
 end
 
 local run_last = function()
-    local last_conf= get_last()
+    local last_conf = get_last()
 
     run_config(last_conf)
 end
 
 local run_current = function()
     local conf = get_config(vim.fn.expand("%:p"))
-    
+
     run_config(conf)
 end
 

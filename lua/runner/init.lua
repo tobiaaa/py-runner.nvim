@@ -29,7 +29,7 @@ end
 local ask_new_config = function()
     vim.ui.input({ prompt = "Enter configuration" },
         function(input)
-            local filename = vim.fn.expand('%')
+            local filename = vim.fn.expand('%:p')
             save_config(filename, input)
         end)
 end

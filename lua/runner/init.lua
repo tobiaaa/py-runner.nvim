@@ -19,7 +19,7 @@ local save_config = function(file, config)
     save_file = io.open(save_path .. '/configs.json', "w+")
     local json = vim.json.encode(save_table)
     if not save_file then
-        print("Could not save config")
+        error("Could not save config")
     else
         save_file:write(json)
         save_file:close()
@@ -46,7 +46,7 @@ local get_config = function(file)
     if config ~= nil then
         return config
     end
-    print("No config found")
+    error("No config found")
 end
 
 local get_last = function()
@@ -76,7 +76,7 @@ local save_last = function(config)
     save_file = io.open(save_path .. '/last.json', "w+")
     local json = vim.json.encode(save_table)
     if not save_file then
-        print("Could not save config")
+        error("Could not save config")
     else
         save_file:write(json)
         save_file:close()
@@ -89,7 +89,6 @@ local run_config = function(config)
     -- Send to terminal
     local term = require("toggleterm")
     term.exec(config)
-    print("Running config...")
 end
 
 local run_last = function()

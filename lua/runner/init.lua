@@ -55,11 +55,24 @@ local get_config = function(file, closure)
 	end
 end
 
+local edit_config = function(filename, closure)
+	local current_config = get_config()
+	vim.ui.input({ prompt = "Enter configuration", completion = "file", default = current_config }, function(input)
+		if filename == nil then
+			filename = vim.fn.expand("%:p")
+		end
+		save_config(filename, input)
+		if closure ~= nil then
+			closure(input)
+		end
+	end)
+end
+
 local get_last = function(closure)
 	local save_file = io.open(save_path .. "/last.json", "r")
 	if not save_file then
 		-- If no saved last config, return current file
-        local config = get_config(vim.fn.expand("%:p"), closure)
+		local config = get_config(vim.fn.expand("%:p"), closure)
 		return config
 	end
 	local save_table = {}
@@ -121,13 +134,15 @@ end
 -- Create User commands
 vim.api.nvim_create_user_command("RunLast", run_last, {})
 vim.api.nvim_create_user_command("AskConfig", ask_new_config, {})
+vim.api.nvim_create_user_command("EditConfig", edit_config, {})
 vim.api.nvim_create_user_command("RunCurrent", run_current, {})
 vim.api.nvim_create_user_command("KillCurrent", kill, {})
 
 -- Create Keybindings
 local map = vim.keymap.set
 
-map("n", "<leader>r", "<cmd>RunLast<CR>", { desc = "Run last configuration" })
+map("n", "<leader>rr", "<cmd>RunLast<CR>", { desc = "Run last configuration" })
 map("n", "<leader>R", "<cmd>RunCurrent<CR>", { desc = "Run current buffer" })
+map("n", "<leader>re", "<cmd>EditConfig<CR>", { desc = "Edit configuration of current file" })
 
 return M

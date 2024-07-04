@@ -59,7 +59,8 @@ local get_last = function(closure)
 	local save_file = io.open(save_path .. "/last.json", "r")
 	if not save_file then
 		-- If no saved last config, return current file
-		return vim.fn.expand("%:p")
+        local config = get_config(vim.fn.expand("%:p"), closure)
+		return config
 	end
 	local save_table = {}
 	save_table = vim.json.decode(save_file:read("*a"))
@@ -109,12 +110,12 @@ local run_last = function()
 end
 
 local run_current = function()
-    get_config(vim.fn.expand("%:p"), run_config)
+	get_config(vim.fn.expand("%:p"), run_config)
 end
 
-local kill = function ()
-    local term = require("toggleterm")
-    term.exec("<C-c>")
+local kill = function()
+	local term = require("toggleterm")
+	term.exec("<C-c>")
 end
 
 -- Create User commands

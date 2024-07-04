@@ -32,7 +32,7 @@ local ask_new_config = function(closure)
 		local filename = vim.fn.expand("%:p")
 		save_config(filename, input)
 		if closure ~= nil then
-			closure()
+			closure(input)
 		end
 	end)
 end

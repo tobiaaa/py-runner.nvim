@@ -11,6 +11,7 @@ end
 
 function M.AskNewFileConfig(callback)
 	local filename = util.RelativePath()
+    print(callback)
 	util.AskValue("Enter Configuration", function(input)
 		M.SaveConfig(filename, input)
 		if callback ~= nil then

@@ -52,7 +52,7 @@ function M.get_config(project, file, callback)
 	end
 end
 
-local edit_config = function(project, filename, closure)
+function M.EditConfig(project, filename, closure)
 	local current_config = M.get_config(project, filename)
 	vim.ui.input({ prompt = "Enter configuration", completion = "file", default = current_config }, function(input)
 		if filename == nil then

@@ -1,11 +1,11 @@
 local M = {}
 
 M.AskValue = function(prompt, callback, default)
-	local ask_conf = { prompt = prompt }
-	if default ~= nil then
-		ask_conf[default] = default
-        print("Adding Default")
-	end
+	local ask_conf = { prompt = prompt, default = "ABC" }
+	-- if default ~= nil then
+	-- 	ask_conf[default] = default
+ --        print("Adding Default")
+	-- end
 	vim.ui.input(ask_conf, function(input)
 		if callback ~= nil then
 			callback(input)

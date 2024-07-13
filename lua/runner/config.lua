@@ -37,7 +37,7 @@ local change_config = function(name)
 		return
 	end
 
-	local config_name = next(util.split(name, ":"))
+	local config_name = util.split(name, ":")
 	print(config_name)
 end
 

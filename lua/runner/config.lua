@@ -37,8 +37,15 @@ local change_config = function(name)
 		return
 	end
 
-	local _,config_name = next(util.split(name, ":"))
-	print(config_name)
+	local _, config_name = next(util.split(name, ":"))
+	local current_config = project.project_configs[config_name]
+
+    util.AskValue("Change Config: " .. config_name, function (output)
+        if output ~= nil then
+            project.project_configs[config_name] = output
+        end
+    end, current_config)
+
 end
 
 function M.EditConfig()

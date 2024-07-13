@@ -2,17 +2,17 @@ local M = {}
 
 local project = require("runner.project")
 local config = require("runner.config")
-return M
--- local save_path = vim.fn.stdpath("data") .. "/runner"
---
--- function M.setup()
--- 	-- Create Data dir
--- 	pcall(vim.fn.mkdir, save_path)
--- 	project.LoadProject()
--- 	if next(project.project) == nil then
--- 		print("Project not found, run PyInitProject")
--- 	end
--- end
+
+local save_path = vim.fn.stdpath("data") .. "/runner"
+
+function M.setup()
+	-- Create Data dir
+	pcall(vim.fn.mkdir, save_path)
+	project.LoadProject()
+	if next(project.project) == nil then
+		print("Project not found, run PyInitProject")
+	end
+end
 --
 -- -- Create User commands
 -- -- vim.api.nvim_create_user_command("PyRunLast", run_last, {})
@@ -29,4 +29,4 @@ return M
 -- map("n", "<leader>R", "<cmd>PyRunCurrent<CR>", { desc = "Run current buffer" })
 -- map("n", "<leader>re", "<cmd>PyEditConfig<CR>", { desc = "Edit configuration of current file" })
 --
--- return M
+return M

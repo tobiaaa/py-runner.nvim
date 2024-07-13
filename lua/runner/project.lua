@@ -4,6 +4,8 @@ local util = require("runner.util")
 local M = {}
 
 M.project = {}
+M.project_name = ""
+M.last_config = nil
 
 function M.SaveProject(name)
 	local project_table = {}
@@ -53,7 +55,16 @@ function M.LoadProject()
 		M.project = {}
 		return
 	end
+	M.project_name = project_name
 	M.project = util.SafeLoadJSON(save_path .. "/" .. project_name .. ".json")
+
+	local last_table = util.SafeLoadJSON(save_path .. "/last.json")
+	if next(last_table) ~= nil then
+		local last_config = last_table[project_name]
+		if last_config ~= nil then
+			M.last_config = last_config
+		end
+	end
 end
 
 function M.InitProject()
@@ -73,6 +84,23 @@ function M.InitProject()
 
 	-- Ask name
 	util.AskValue("Project Name", M.SaveProject)
+end
+
+function M.SaveLast(config)
+	M.last_config = config
+
+	local last_save_table = util.SafeLoadJSON(save_path .. "/last.json")
+
+	last_save_table[M.project_name] = config
+
+	local last_save_file = io.open(save_path .. "/last.json", "w+")
+	local json = vim.json.encode(last_save_table)
+	if not last_save_file then
+		error("Could not save last config")
+	else
+		last_save_file:write(json)
+		last_save_file:close()
+	end
 end
 
 return M

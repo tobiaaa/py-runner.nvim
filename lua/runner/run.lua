@@ -1,5 +1,6 @@
 local util = require("runner.util")
 local config = require("runner.config")
+local project = require("runner.project")
 
 local M = {}
 
@@ -9,8 +10,16 @@ M.RunCurrent = function()
 	config.GetConfig(current_file, M.RunConfig)
 end
 
+M.RunLast = function ()
+    if project.last_config == nil then
+        M.RunCurrent()
+    else
+        M.RunConfig(project.last_config)
+    end
+end
+
 M.RunConfig = function(run_config)
-	config.SaveLast(run_config)
+	project.SaveLast(run_config)
 
 	-- Send to terminal
 	if config ~= nil then

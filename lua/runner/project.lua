@@ -53,10 +53,7 @@ function M.LoadProject()
 		M.project = {}
 		return
 	end
-	local project_config_file = io.open(save_path .. "/" .. project_name .. ".json", "w+")
-	if project_config_file then
-		_, M.project = pcall(vim.json.decode, project_config_file:read("*a"))
-	end
+	M.project = util.SafeLoadJSON(save_path .. "/" .. project_name .. ".json")
 end
 
 function M.InitProject()

@@ -23,7 +23,7 @@ local function saveProject(name)
 		project_file:close()
 	end
 
-	local project_config_file = io.open(save_path .. "/" .. name .. ".json")
+	local project_config_file = io.open(save_path .. "/" .. name .. ".json", "w+")
 	json = vim.json.encode({})
 	if not project_config_file then
 		error("Could not save project config")

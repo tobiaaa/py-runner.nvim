@@ -16,6 +16,7 @@ vim.api.nvim_create_user_command("PyRunLast", run.RunLast, {})
 vim.api.nvim_create_user_command("PyNewFileConfig", config.AskNewFileConfig, {})
 vim.api.nvim_create_user_command("PyEditConfig", config.EditConfig, {})
 vim.api.nvim_create_user_command("PyRunCurrent", run.RunCurrent, {})
+vim.api.nvim_create_user_command("PyRunSelection", run.RunSelection, {})
 -- vim.api.nvim_create_user_command("PyKillCurrent", kill, {})
 vim.api.nvim_create_user_command("PyInitProject", project.InitProject, {})
 --

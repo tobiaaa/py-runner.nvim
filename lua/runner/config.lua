@@ -32,6 +32,15 @@ function M.GetConfig(file, callback)
 	end
 end
 
+local change_config = function(name)
+	if name == nil then
+		return
+	end
+
+	local config_name = next(util.split(name, ":"))
+	print(config_name)
+end
+
 function M.EditConfig()
 	local choices = {}
 	for key, value in pairs(project.project_configs) do
@@ -41,9 +50,7 @@ function M.EditConfig()
 	-- Choose which config to edit
 	vim.ui.select(choices, {
 		prompt = "Select Configuration to edit",
-	}, function(choice)
-		print(choice)
-	end)
+	}, change_config)
 end
 
 return M

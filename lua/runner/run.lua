@@ -30,4 +30,26 @@ M.RunConfig = function(run_config)
 	end
 end
 
+local run_selected = function(choice)
+	if choice == nil then
+		return
+	end
+
+	local _, selected_config = next(util.split(choice, ":"), 2)
+
+	M.RunConfig(selected_config)
+end
+
+M.RunSelection = function()
+	local choices = {}
+	for key, value in pairs(project.project_configs) do
+		table.insert(choices, key .. ": " .. value)
+	end
+
+	-- Choose which config to edit
+	vim.ui.select(choices, {
+		prompt = "Select configuration to run",
+	}, run_selected)
+end
+
 return M

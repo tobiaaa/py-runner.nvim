@@ -38,7 +38,7 @@ function M.SaveProject(name)
 		project_config_file:close()
 	end
 	M.project = {}
-    M.project_name = name
+	M.project_name = name
 end
 
 function M.SaveProjectConfigs()
@@ -114,5 +114,7 @@ function M.SaveLast(config)
 		last_save_file:close()
 	end
 end
+
+M.LoadProject()
 
 return M

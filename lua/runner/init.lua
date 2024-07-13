@@ -10,7 +10,6 @@ local save_path = vim.fn.stdpath("data") .. "/runner"
 function M.setup()
 	-- Create Data dir
 	pcall(vim.fn.mkdir, save_path)
-	project.LoadProject()
 end
 
 -- Create User commands

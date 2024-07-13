@@ -1,7 +1,7 @@
 local M = {}
 
-local util = require("util")
-local project = require("require")
+local util = require("runner.util")
+local project = require("runner.project")
 
 local save_path = vim.fn.stdpath("data") .. "/runner"
 

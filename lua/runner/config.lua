@@ -33,12 +33,17 @@ function M.GetConfig(file, callback)
 end
 
 function M.EditConfig()
-    -- Choose which config to edit
-    vim.ui.select({project.project_configs},{
-        prompt = "Select Configuration to edit"
-    }, function (choice)
-        print(choice)
-    end)
+	local choices = {}
+	for key, value in pairs(project.project_configs) do
+		table.insert(choices, key .. ": " .. value)
+	end
+
+	-- Choose which config to edit
+	vim.ui.select(choices, {
+		prompt = "Select Configuration to edit",
+	}, function(choice)
+		print(choice)
+	end)
 end
 
 return M

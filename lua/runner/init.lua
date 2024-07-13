@@ -14,7 +14,7 @@ end
 
 -- Create User commands
 vim.api.nvim_create_user_command("PyRunLast", run.RunLast, {})
-vim.api.nvim_create_user_command("PyAskConfig", config.AskNewConfig, {})
+vim.api.nvim_create_user_command("PyNewFileConfig", config.AskNewFileConfig, {})
 vim.api.nvim_create_user_command("PyEditConfig", config.EditConfig, {})
 vim.api.nvim_create_user_command("PyRunCurrent", run.RunCurrent, {})
 -- vim.api.nvim_create_user_command("PyKillCurrent", kill, {})

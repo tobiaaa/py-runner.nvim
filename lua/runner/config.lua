@@ -1,16 +1,15 @@
 local util = require("runner.util")
 local project = require("runner.project")
 
-local save_path = vim.fn.stdpath("data") .. "/runner"
-
 local M = {}
 
 function M.SaveConfig(file, config)
-	project.project[file] = config
+	project.project_configs[file] = config
+    project.project_files[file] = file
 	project.SaveProjectConfigs()
 end
 
-function M.AskNewConfig(callback)
+function M.AskNewFileConfig(callback)
 	local filename = util.RelativePath()
 	util.AskValue("Enter Configuration", function(input)
 		M.SaveConfig(filename, input)
@@ -21,14 +20,15 @@ function M.AskNewConfig(callback)
 end
 
 function M.GetConfig(file, callback)
-	local config = project.project[file]
+    local config_name = project.project_files[file]
+	local config = project.project_configs[config_name]
 	if config ~= nil then
 		if callback ~= nil then
 			callback(config)
 		end
 		return config
 	else
-		M.AskNewConfig(callback)
+		M.AskNewFileConfig(callback)
 	end
 end
 

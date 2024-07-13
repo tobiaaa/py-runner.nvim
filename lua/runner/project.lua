@@ -1,5 +1,5 @@
 local save_path = vim.fn.stdpath("data") .. "/runner"
-local util = require("util")
+local util = require("runner.util")
 
 local function saveProject(name)
 	local project_table = {}

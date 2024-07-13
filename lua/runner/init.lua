@@ -11,6 +11,7 @@ function M.setup()
 	-- Create Data dir
 	pcall(vim.fn.mkdir, save_path)
 	project.LoadProject()
+    error("TEST")
 	if next(project.project) == nil then
 		print("Project not found, run PyInitProject")
 	end

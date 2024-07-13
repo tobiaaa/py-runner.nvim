@@ -9,7 +9,7 @@ M.AskValue = function(prompt, callback, default_val)
 	end
 	vim.ui.input(ask_conf, function(input)
 		if callback ~= nil then
-			callback(input)
+			pcall(callback, input)
 		end
 	end)
 end

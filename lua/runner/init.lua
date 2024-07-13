@@ -1,5 +1,8 @@
 local M = {}
 
+local util = require("util")
+local project = require("require")
+
 local save_path = vim.fn.stdpath("data") .. "/runner"
 
 function M.setup()
@@ -132,17 +135,18 @@ local kill = function()
 end
 
 -- Create User commands
-vim.api.nvim_create_user_command("RunLast", run_last, {})
-vim.api.nvim_create_user_command("AskConfig", ask_new_config, {})
-vim.api.nvim_create_user_command("EditConfig", edit_config, {})
-vim.api.nvim_create_user_command("RunCurrent", run_current, {})
-vim.api.nvim_create_user_command("KillCurrent", kill, {})
+vim.api.nvim_create_user_command("PyRunLast", run_last, {})
+vim.api.nvim_create_user_command("PyAskConfig", ask_new_config, {})
+vim.api.nvim_create_user_command("PyEditConfig", edit_config, {})
+vim.api.nvim_create_user_command("PyRunCurrent", run_current, {})
+vim.api.nvim_create_user_command("PyKillCurrent", kill, {})
+vim.api.nvim_create_user_command("PyInitProject", project.InitProject, {})
 
 -- Create Keybindings
 local map = vim.keymap.set
 
-map("n", "<leader>rr", "<cmd>RunLast<CR>", { desc = "Run last configuration" })
-map("n", "<leader>R", "<cmd>RunCurrent<CR>", { desc = "Run current buffer" })
-map("n", "<leader>re", "<cmd>EditConfig<CR>", { desc = "Edit configuration of current file" })
+map("n", "<leader>rr", "<cmd>PyRunLast<CR>", { desc = "Run last configuration" })
+map("n", "<leader>R", "<cmd>PyRunCurrent<CR>", { desc = "Run current buffer" })
+map("n", "<leader>re", "<cmd>PyEditConfig<CR>", { desc = "Edit configuration of current file" })
 
 return M

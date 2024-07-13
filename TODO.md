@@ -15,3 +15,5 @@
     - [ ] Run config
     - [ ] Stop run
     - [ ] Callbacks
+    - [ ] Reset
+

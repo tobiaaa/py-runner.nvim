@@ -5,7 +5,7 @@ local M = {}
 
 M.project = {}
 
-function M.saveProject(name)
+function M.SaveProject(name)
 	local project_table = {}
 
 	local project_file = io.open(save_path .. "/projects.json", "r")
@@ -48,14 +48,14 @@ function M.LoadProject()
 	end
 
 	local project_name = project_table[project_path]
-    if project_name == nil then
-        print("Project not found, run PyInitProject")
-        M.project = {}
-        return
-    end
+	if project_name == nil then
+		print("Project not found, run PyInitProject")
+		M.project = {}
+		return
+	end
 	local project_config_file = io.open(save_path .. "/" .. project_name .. ".json", "w+")
 	if project_config_file then
-		M.project = vim.json.decode(project_config_file:read("*a"))
+		_, M.project = pcall(vim.json.decode, project_config_file:read("*a"))
 	end
 end
 
@@ -75,7 +75,7 @@ function M.InitProject()
 	end
 
 	-- Ask name
-	util.AskValue("Project Name", M.saveProject)
+	util.AskValue("Project Name", M.SaveProject)
 end
 
 return M

@@ -4,7 +4,7 @@ local save_path = vim.fn.stdpath("data") .. "/runner"
 
 local M = {}
 
-function M.save_config(file, config)
+function M.SaveConfig(file, config)
 	local save_file = io.open(save_path .. "/configs.json", "r")
 	local save_table = {}
 	if save_file then
@@ -34,7 +34,7 @@ function M.AskNewConfig(callback)
 	end)
 end
 
-function M.get_config(project, file, callback)
+function M.GetConfig(project, file, callback)
 	local save_file = io.open(save_path .. "/" .. "configs.json", "r")
 	local save_table = {}
 	if save_file then
@@ -53,12 +53,12 @@ function M.get_config(project, file, callback)
 end
 
 function M.EditConfig(project, filename, closure)
-	local current_config = M.get_config(project, filename)
+	local current_config = M.GetConfig(project, filename)
 	vim.ui.input({ prompt = "Enter configuration", completion = "file", default = current_config }, function(input)
 		if filename == nil then
 			filename = vim.fn.expand("%:p")
 		end
-		M.save_config(filename, input)
+		M.SaveConfig(filename, input)
 		if closure ~= nil then
 			closure(input)
 		end

@@ -61,7 +61,13 @@ end
 
 function M.NewConfig()
 	util.AskValue("Enter Configuration Name", function(config_name)
+        if config_name == nil then
+            return
+        end
 		local callback_fn = function(config_val)
+            if config_val == nil then
+                return
+            end
 			project.project_configs[config_name] = config_val
 			project.SaveProjectConfigs()
 		end

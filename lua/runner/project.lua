@@ -50,6 +50,8 @@ function M.LoadProject()
 	local project_name = project_table[project_path]
     if project_name == nil then
         print("Project not found, run PyInitProject")
+        M.project = {}
+        return
     end
 	local project_config_file = io.open(save_path .. "/" .. project_name .. ".json", "w+")
 	if project_config_file then

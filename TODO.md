@@ -2,7 +2,7 @@
 - [ ] Choose config from selection
 - [ ] Add proper support for command line arguments/flags
 - [ ] New config system
-    - [ ] Configs are managed per project
+    - [x] Configs are managed per project
     - [ ] Parent project support
     - [ ] Configurations are named
     - [ ] Can be associated with file
@@ -10,9 +10,9 @@
 - [ ] Support environment variables
 - [ ] Support python venvs
 - [ ] Functions
-    - [ ] Add new config
+    - [x] Add new config
     - [ ] Edit configs
-    - [ ] Run config
+    - [x] Run config
     - [ ] Stop run
     - [ ] Callbacks
     - [ ] Reset

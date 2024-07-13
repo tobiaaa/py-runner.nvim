@@ -25,7 +25,9 @@ M.RunConfig = function(run_config)
 	if run_config ~= nil then
 		local term = require("toggleterm")
 		term.exec(run_config)
-	end
+    else
+        error("Config nil")
+    end
 end
 
 return M

@@ -15,7 +15,7 @@ function M.AskNewConfig(callback)
 	util.AskValue("Enter Configuration", function(input)
 		M.SaveConfig(filename, input)
 		if callback ~= nil then
-			callback()
+			callback(input)
 		end
 	end, "python " .. filename)
 end

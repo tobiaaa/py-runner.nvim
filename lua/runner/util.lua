@@ -21,6 +21,7 @@ M.SafeLoadJSON = function(path)
             return {}
 		end
 	end
+    return {}
 end
 
 M.RelativePath = function ()

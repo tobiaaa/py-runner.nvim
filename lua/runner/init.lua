@@ -10,10 +10,10 @@ local save_path = vim.fn.stdpath("data") .. "/runner"
 function M.setup()
 	-- Create Data dir
 	pcall(vim.fn.mkdir, save_path)
-	--project.LoadProject()
-	--if next(project.project) == nil then
-	--	print("Project not found, run PyInitProject")
-	--end
+	-- project.LoadProject()
+	-- if next(project.project) == nil then
+	-- 	print("Project not found, run PyInitProject")
+	-- end
 end
 
 -- Create User commands

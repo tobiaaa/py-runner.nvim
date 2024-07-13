@@ -38,6 +38,18 @@ function M.SaveProject(name)
 		project_config_file:close()
 	end
 	M.project = {}
+    M.project_name = name
+end
+
+function M.SaveProjectConfigs()
+	local project_config_file = io.open(save_path .. "/" .. M.project_name .. ".json", "w+")
+	local json = vim.json.encode(M.project)
+	if not project_config_file then
+		error("Could not save project config")
+	else
+		project_config_file:write(json)
+		project_config_file:close()
+	end
 end
 
 function M.LoadProject()

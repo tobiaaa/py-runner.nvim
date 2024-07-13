@@ -6,29 +6,14 @@ local save_path = vim.fn.stdpath("data") .. "/runner"
 local M = {}
 
 function M.SaveConfig(file, config)
-	local save_file = io.open(save_path .. "/configs.json", "r")
-	local save_table = {}
-	if save_file then
-		save_table = vim.json.decode(save_file:read("*a"))
-		save_file:close()
-	end
-	-- Save config in table with file path as key
-	save_table[file] = config
-
-	save_file = io.open(save_path .. "/configs.json", "w+")
-	local json = vim.json.encode(save_table)
-	if not save_file then
-		error("Could not save config")
-	else
-		save_file:write(json)
-		save_file:close()
-	end
+    project.project[file] = config
+    project.SaveProject()
 end
 
 function M.AskNewConfig(callback)
 	local filename = util.RelativePath()
 	util.AskValue("Enter Configuration", function(input)
-		M.save_config(filename, input)
+		M.SaveConfig(filename, input)
 		if callback ~= nil then
 			callback()
 		end

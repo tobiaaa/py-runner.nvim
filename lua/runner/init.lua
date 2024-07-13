@@ -13,7 +13,7 @@ function M.setup()
 end
 
 -- Create User commands
--- vim.api.nvim_create_user_command("PyRunLast", run_last, {})
+vim.api.nvim_create_user_command("PyRunLast", run.RunLast, {})
 vim.api.nvim_create_user_command("PyAskConfig", config.AskNewConfig, {})
 vim.api.nvim_create_user_command("PyEditConfig", config.EditConfig, {})
 vim.api.nvim_create_user_command("PyRunCurrent", run.RunCurrent, {})

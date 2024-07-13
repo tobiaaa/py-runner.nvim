@@ -1,5 +1,5 @@
 local M = {
-	AskValue = function(prompt, default, callback)
+	AskValue = function(prompt, callback, default)
         local ask_conf = {prompt=prompt}
         if default ~= nil then
             ask_conf[default] = default

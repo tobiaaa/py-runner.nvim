@@ -51,7 +51,7 @@ local M = {
 		end
 
 		-- Ask name
-		util.AskValue("Project Name", saveProject)
+		util.AskValue{name="Project Name", callback=saveProject}
 	end,
 }
 return M

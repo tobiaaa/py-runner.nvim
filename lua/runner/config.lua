@@ -1,4 +1,5 @@
 local util = require("runner.util")
+local project = require("runner.project")
 
 local save_path = vim.fn.stdpath("data") .. "/runner"
 
@@ -34,21 +35,15 @@ function M.AskNewConfig(callback)
 	end)
 end
 
-function M.GetConfig(project, file, callback)
-	local save_file = io.open(save_path .. "/" .. "configs.json", "r")
-	local save_table = {}
-	if save_file then
-		save_table = vim.json.decode(save_file:read("*a"))
-		save_file:close()
-	end
-	local config = save_table[file]
+function M.GetConfig(file, callback)
+	local config = project.project[file]
 	if config ~= nil then
 		if callback ~= nil then
 			callback(config)
 		end
 		return config
 	else
-		M.ask_new_config(callback)
+		M.AskNewConfig(callback)
 	end
 end
 

@@ -19,10 +19,9 @@ M.RunLast = function()
 end
 
 M.RunConfig = function(run_config)
-	project.SaveLast(run_config)
-
 	-- Send to terminal
 	if run_config ~= nil then
+		project.SaveLast(run_config)
 		local term = require("toggleterm")
 		term.exec(run_config)
 	else
@@ -35,9 +34,9 @@ local run_selected = function(choice)
 		return
 	end
 
-	local _, selected_config = next(util.split(choice, ":"), 2)
+	local _, selected = next(util.split(choice, ":"))
 
-	M.RunConfig(selected_config)
+	M.RunConfig(project.project_configs[selected])
 end
 
 M.RunSelection = function()

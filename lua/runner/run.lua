@@ -22,9 +22,9 @@ M.RunConfig = function(run_config)
 	project.SaveLast(run_config)
 
 	-- Send to terminal
-	if config ~= nil then
+	if run_config ~= nil then
 		local term = require("toggleterm")
-		term.exec(config)
+		term.exec(run_config)
 	end
 end
 

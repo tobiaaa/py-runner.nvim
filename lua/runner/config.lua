@@ -6,8 +6,8 @@ local save_path = vim.fn.stdpath("data") .. "/runner"
 local M = {}
 
 function M.SaveConfig(file, config)
-    project.project[file] = config
-    project.SaveProjectConfigs()
+	project.project[file] = config
+	project.SaveProjectConfigs()
 end
 
 function M.AskNewConfig(callback)

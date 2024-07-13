@@ -24,7 +24,7 @@ function M.save_config(file, config)
 	end
 end
 
-function M.ask_new_config(callback)
+function M.AskNewConfig(callback)
 	util.AskValue("Enter Configuration", function(input)
 		local filename = vim.fn.expand("%:p")
 		M.save_config(filename, input)

@@ -10,12 +10,12 @@ M.RunCurrent = function()
 	config.GetConfig(current_file, M.RunConfig)
 end
 
-M.RunLast = function ()
-    if project.last_config == nil then
-        M.RunCurrent()
-    else
-        M.RunConfig(project.last_config)
-    end
+M.RunLast = function()
+	if project.last_config == nil then
+		M.RunCurrent()
+	else
+		M.RunConfig(project.last_config)
+	end
 end
 
 M.RunConfig = function(run_config)
@@ -25,9 +25,9 @@ M.RunConfig = function(run_config)
 	if run_config ~= nil then
 		local term = require("toggleterm")
 		term.exec(run_config)
-    else
-        error("Config nil")
-    end
+	else
+		error("Config nil")
+	end
 end
 
 return M

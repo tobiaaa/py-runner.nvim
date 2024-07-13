@@ -17,15 +17,15 @@ M.SafeLoadJSON = function(path)
 		local success, out = pcall(vim.json.decode, file:read("*a"))
 		if success then
 			return out
-        else
-            return {}
+		else
+			return {}
 		end
 	end
-    return {}
+	return {}
 end
 
-M.RelativePath = function ()
-    return vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
+M.RelativePath = function()
+	return vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
 end
 
 return M

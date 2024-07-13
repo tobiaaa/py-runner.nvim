@@ -71,10 +71,10 @@ function M.LoadProject()
 	M.project_name = project_name
 	local project_save = util.SafeLoadJSON(save_path .. "/" .. project_name .. ".json")
 
-    if next(project_save) ~= nil then
-        M.project_configs = project_save["configs"]
-        M.project_files = project_save["files"]
-    end
+	if next(project_save) ~= nil then
+		M.project_configs = project_save["configs"]
+		M.project_files = project_save["files"]
+	end
 
 	local last_table = util.SafeLoadJSON(save_path .. "/last.json")
 	if next(last_table) ~= nil then

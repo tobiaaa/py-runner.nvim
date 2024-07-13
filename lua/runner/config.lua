@@ -58,7 +58,7 @@ local edit_config = function(project, filename, closure)
 		if filename == nil then
 			filename = vim.fn.expand("%:p")
 		end
-		save_config(filename, input)
+		M.save_config(filename, input)
 		if closure ~= nil then
 			closure(input)
 		end

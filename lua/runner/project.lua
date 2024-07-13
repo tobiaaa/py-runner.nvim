@@ -1,7 +1,11 @@
 local save_path = vim.fn.stdpath("data") .. "/runner"
 local util = require("runner.util")
 
-local function saveProject(name)
+local M = {}
+
+M.project = {}
+
+function M.saveProject(name)
 	local project_table = {}
 
 	local project_file = io.open(save_path .. "/projects.json", "r")
@@ -24,34 +28,49 @@ local function saveProject(name)
 	end
 
 	local project_config_file = io.open(save_path .. "/" .. name .. ".json", "w+")
-	json = vim.json.encode({})
+	json = vim.json.encode(M.project)
 	if not project_config_file then
 		error("Could not save project config")
 	else
 		project_config_file:write(json)
 		project_config_file:close()
 	end
+	M.project = {}
 end
 
-local M = {
+function M.LoadProject()
+	local project_path = vim.fn.getcwd()
+	local project_table = {}
+	local project_file = io.open(save_path .. "/projects.json", "r")
+	if project_file then
+		project_table = vim.json.decode(project_file:read("*a"))
+		project_file:close()
+	end
 
-	InitProject = function()
-		-- Check if project at path exists
-		local project_table = {}
+	local project_name = project_table[project_path]
+	local project_config_file = io.open(save_path .. "/" .. project_name .. ".json", "w+")
+	if project_config_file then
+		M.project = vim.json.decode(project_config_file:read("*a"))
+	end
+end
 
-		local project_file = io.open(save_path .. "/projects.json", "r")
-		if project_file then
-			project_table = vim.json.decode(project_file:read("*a"))
-			project_file:close()
-		end
+function M.InitProject()
+	-- Check if project at path exists
+	local project_table = {}
 
-		local project_path = vim.fn.getcwd()
-		if project_table[project_path] ~= nil then
-			return project_table[project_path]
-		end
+	local project_file = io.open(save_path .. "/projects.json", "r")
+	if project_file then
+		project_table = vim.json.decode(project_file:read("*a"))
+		project_file:close()
+	end
 
-		-- Ask name
-		util.AskValue("Project Name", saveProject)
-	end,
-}
+	local project_path = vim.fn.getcwd()
+	if project_table[project_path] ~= nil then
+		return project_table[project_path]
+	end
+
+	-- Ask name
+	util.AskValue("Project Name", M.saveProject)
+end
+
 return M

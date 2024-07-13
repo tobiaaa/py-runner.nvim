@@ -2,73 +2,18 @@ local M = {}
 
 local util = require("runner.util")
 local project = require("runner.project")
+local run = require("runner.run")
+local config = require("runner.config")
 
 local save_path = vim.fn.stdpath("data") .. "/runner"
 
 function M.setup()
 	-- Create Data dir
 	pcall(vim.fn.mkdir, save_path)
-end
-
-local save_config = function(file, config)
-	local save_file = io.open(save_path .. "/configs.json", "r")
-	local save_table = {}
-	if save_file then
-		save_table = vim.json.decode(save_file:read("*a"))
-		save_file:close()
-	end
-	-- Save config in table with file path as key
-	save_table[file] = config
-
-	save_file = io.open(save_path .. "/configs.json", "w+")
-	local json = vim.json.encode(save_table)
-	if not save_file then
-		error("Could not save config")
-	else
-		save_file:write(json)
-		save_file:close()
-	end
-end
-
-local ask_new_config = function(closure)
-	vim.ui.input({ prompt = "Enter configuration", completion = "file" }, function(input)
-		local filename = vim.fn.expand("%:p")
-		save_config(filename, input)
-		if closure ~= nil then
-			closure(input)
-		end
-	end)
-end
-
-local get_config = function(file, closure)
-	local save_file = io.open(save_path .. "/configs.json", "r")
-	local save_table = {}
-	if save_file then
-		save_table = vim.json.decode(save_file:read("*a"))
-		save_file:close()
-	end
-	local config = save_table[file]
-	if config ~= nil then
-		if closure ~= nil then
-			closure(config)
-		end
-		return config
-	else
-		ask_new_config(closure)
-	end
-end
-
-local edit_config = function(filename, closure)
-	local current_config = get_config()
-	vim.ui.input({ prompt = "Enter configuration", completion = "file", default = current_config }, function(input)
-		if filename == nil then
-			filename = vim.fn.expand("%:p")
-		end
-		save_config(filename, input)
-		if closure ~= nil then
-			closure(input)
-		end
-	end)
+    project.LoadProject()
+    if next(project.project) == nil then
+        print("Project not found, run PyInitProject")
+    end
 end
 
 local get_last = function(closure)

@@ -7,7 +7,7 @@ local M = {}
 
 function M.SaveConfig(file, config)
     project.project[file] = config
-    project.SaveProject()
+    project.SaveProjectConfigs()
 end
 
 function M.AskNewConfig(callback)

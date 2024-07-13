@@ -23,4 +23,8 @@ M.SafeLoadJSON = function(path)
 	end
 end
 
+M.RelativePath = function ()
+    return vim.fn.fnamemodify(vim.fn.expand("%"), ":~:.")
+end
+
 return M

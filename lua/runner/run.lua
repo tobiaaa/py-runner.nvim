@@ -4,7 +4,7 @@ local config = require("runner.config")
 local M = {}
 
 M.RunCurrent = function()
-	local current_file = vim.fn.expand("%p")
+	local current_file = util.RelativePath()
 
 	config.GetConfig(current_file, M.RunConfig)
 end

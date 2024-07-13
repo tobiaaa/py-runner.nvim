@@ -26,13 +26,13 @@ function M.SaveConfig(file, config)
 end
 
 function M.AskNewConfig(callback)
+	local filename = util.RelativePath()
 	util.AskValue("Enter Configuration", function(input)
-		local filename = vim.fn.expand("%:p")
 		M.save_config(filename, input)
 		if callback ~= nil then
 			callback()
 		end
-	end)
+	end, "python " .. filename)
 end
 
 function M.GetConfig(file, callback)
@@ -47,11 +47,11 @@ function M.GetConfig(file, callback)
 	end
 end
 
-function M.EditConfig(project, filename, closure)
+function M.EditConfig(filename, closure)
 	local current_config = M.GetConfig(project, filename)
 	vim.ui.input({ prompt = "Enter configuration", completion = "file", default = current_config }, function(input)
 		if filename == nil then
-			filename = vim.fn.expand("%:p")
+			filename = util.RelativePath()
 		end
 		M.SaveConfig(filename, input)
 		if closure ~= nil then

@@ -40,12 +40,11 @@ local change_config = function(name)
 	local _, config_name = next(util.split(name, ":"))
 	local current_config = project.project_configs[config_name]
 
-    util.AskValue("Change Config: " .. config_name, function (output)
-        if output ~= nil then
-            project.project_configs[config_name] = output
-        end
-    end, current_config)
-
+	util.AskValue("Change Config: " .. config_name, function(output)
+		if output ~= nil then
+			project.project_configs[config_name] = output
+		end
+	end, current_config)
 end
 
 function M.EditConfig()
@@ -58,6 +57,16 @@ function M.EditConfig()
 	vim.ui.select(choices, {
 		prompt = "Select Configuration to edit",
 	}, change_config)
+end
+
+function M.NewConfig()
+	util.AskValue("Enter Configuration Name", function(config_name)
+		local callback_fn = function(config_val)
+			project.project_configs[config_name] = config_val
+			project.SaveProjectConfigs()
+		end
+        util.AskValue("Enter Configuration", callback_fn)
+	end)
 end
 
 return M

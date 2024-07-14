@@ -4,7 +4,6 @@ local project = require("runner.project")
 local config = require("runner.config")
 local run = require("runner.run")
 
-
 local save_path = vim.fn.stdpath("data") .. "/runner"
 
 function M.setup()

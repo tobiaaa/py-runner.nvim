@@ -104,7 +104,6 @@ function M.InitProject()
 
 	-- Ask name
 	util.AskValue("Project Name", M.SaveNewProject)
-
 end
 
 function M.SaveLast(config)

@@ -22,7 +22,7 @@ end
 function M.GetConfig(file, callback)
 	local config_name = project.project_files[file]
 	local config = project.project_configs[config_name]
-  
+
 	if config ~= nil then
 		if callback ~= nil then
 			callback(config)
@@ -62,18 +62,17 @@ end
 
 function M.NewConfig()
 	util.AskValue("Enter Configuration Name", function(config_name)
-        if config_name == nil then
-            return
-        end
+		if config_name == nil then
+			return
+		end
 		local callback_fn = function(config_val)
-            if config_val == nil then
-                return
-            end
+			if config_val == nil then
+				return
+			end
 			project.project_configs[config_name] = config_val
 			project.SaveProjectConfigs()
 		end
-        util.AskValue("Enter Configuration", callback_fn)
-
+		util.AskValue("Enter Configuration", callback_fn)
 	end)
 end
 

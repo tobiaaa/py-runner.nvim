@@ -1,7 +1,7 @@
 local M = {}
 
 M.AskValue = function(prompt, callback, default_val)
-    local ask_conf = {}
+	local ask_conf = {}
 	if default_val ~= nil then
 		ask_conf = { prompt = prompt, default = default_val }
 	else

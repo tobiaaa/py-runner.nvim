@@ -11,7 +11,6 @@ end
 
 function M.AskNewFileConfig(callback)
 	local filename = util.RelativePath()
-    print(callback)
 	util.AskValue("Enter Configuration", function(input)
 		M.SaveConfig(filename, input)
 		if callback ~= nil then
@@ -23,6 +22,7 @@ end
 function M.GetConfig(file, callback)
 	local config_name = project.project_files[file]
 	local config = project.project_configs[config_name]
+  
 	if config ~= nil then
 		if callback ~= nil then
 			callback(config)
@@ -73,6 +73,7 @@ function M.NewConfig()
 			project.SaveProjectConfigs()
 		end
         util.AskValue("Enter Configuration", callback_fn)
+
 	end)
 end
 

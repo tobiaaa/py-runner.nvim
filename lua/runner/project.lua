@@ -11,6 +11,7 @@ M.last_config = nil
 function M.SaveNewProject(name)
 	local project_table = {}
 	-- Load existing projects
+
 	local project_file = io.open(save_path .. "/projects.json", "r")
 	if project_file then
 		project_table = vim.json.decode(project_file:read("*a"))
@@ -39,6 +40,7 @@ function M.SaveNewProject(name)
 		project_config_file:write(json)
 		project_config_file:close()
 	end
+
 	M.project_name = name
 end
 
@@ -102,6 +104,7 @@ function M.InitProject()
 
 	-- Ask name
 	util.AskValue("Project Name", M.SaveNewProject)
+
 end
 
 function M.SaveLast(config)

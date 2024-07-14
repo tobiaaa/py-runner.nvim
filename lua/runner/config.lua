@@ -1,16 +1,15 @@
 local util = require("runner.util")
 local project = require("runner.project")
 
-local save_path = vim.fn.stdpath("data") .. "/runner"
-
 local M = {}
 
 function M.SaveConfig(file, config)
-	project.project[file] = config
+	project.project_configs[file] = config
+	project.project_files[file] = file
 	project.SaveProjectConfigs()
 end
 
-function M.AskNewConfig(callback)
+function M.AskNewFileConfig(callback)
 	local filename = util.RelativePath()
 	util.AskValue("Enter Configuration", function(input)
 		M.SaveConfig(filename, input)
@@ -21,27 +20,60 @@ function M.AskNewConfig(callback)
 end
 
 function M.GetConfig(file, callback)
-	local config = project.project[file]
+	local config_name = project.project_files[file]
+	local config = project.project_configs[config_name]
+  
 	if config ~= nil then
 		if callback ~= nil then
 			callback(config)
 		end
 		return config
 	else
-		M.AskNewConfig(callback)
+		M.AskNewFileConfig(callback)
 	end
 end
 
-function M.EditConfig(filename, closure)
-	local current_config = M.GetConfig(project, filename)
-	vim.ui.input({ prompt = "Enter configuration", completion = "file", default = current_config }, function(input)
-		if filename == nil then
-			filename = util.RelativePath()
+local change_config = function(name)
+	if name == nil then
+		return
+	end
+
+	local _, config_name = next(util.split(name, ":"))
+	local current_config = project.project_configs[config_name]
+
+	util.AskValue("Change Config: " .. config_name, function(output)
+		if output ~= nil then
+			project.project_configs[config_name] = output
 		end
-		M.SaveConfig(filename, input)
-		if closure ~= nil then
-			closure(input)
+	end, current_config)
+end
+
+function M.EditConfig()
+	local choices = {}
+	for key, value in pairs(project.project_configs) do
+		table.insert(choices, key .. ": " .. value)
+	end
+
+	-- Choose which config to edit
+	vim.ui.select(choices, {
+		prompt = "Select Configuration to edit",
+	}, change_config)
+end
+
+function M.NewConfig()
+	util.AskValue("Enter Configuration Name", function(config_name)
+        if config_name == nil then
+            return
+        end
+		local callback_fn = function(config_val)
+            if config_val == nil then
+                return
+            end
+			project.project_configs[config_name] = config_val
+			project.SaveProjectConfigs()
 		end
+        util.AskValue("Enter Configuration", callback_fn)
+
 	end)
 end
 
